@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+    <title>Check</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <style>
+    	#inputText {
+    		width: 150px;
+    	}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="nav-link" th:href="@{/flashcards}">Flashcards</a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+
+        <h1>Flashcard Practice Mode</h1>
+
+        <form th:action="@{/check}" th:object="${currFlashcard}" method="post">
+            <div class="form-group">
+                <label for="inputText">Front:</label>
+                <p class="mb-3" th:text="${currFlashcard.front}"></p>
+                <input type="hidden" name="flashcardId" th:value="${currFlashcard.id}">
+            </div>
+        </form>
+        <div th:if="${Message eq 'Correct'}" class="alert alert-success">Correct</div>
+        <div th:if="${Message eq 'Incorrect'}" class="alert alert-danger" th:text="${currFlashcard.back}"></div>
+        <a class="btn btn-primary" href="/practice">New flashcard</a>
+    </div>
+</body>
+</html>

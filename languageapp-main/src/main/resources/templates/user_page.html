@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>User Page</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>User Details</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${appuser.username}"></h5>
+            <p class="card-text">Email: <span th:text="${appuser.email}"></span></p>
+            <p class="card-text">Enabled: <span th:text="${appuser.enabled} ? 'Yes' : 'No'"></span></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

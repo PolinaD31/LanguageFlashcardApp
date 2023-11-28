@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Signup</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+	<style>
+            .link-container {
+                display: block;
+                margin-top: 7px; 
+            }
+        </style>
+</head>
+<body>
+<div class="container">
+	<h1>Sign-up</h1>
+	<div class="alert alert-warning" th:if="${message != null}">
+            <p>[[${message}]]</p>
+        </div>
+     <div class="col-md-4">
+		<form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
+			<div>
+				<label> Username :<input type="text" th:field="*{username}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>	
+			</div>
+			<div>
+				<label> Email :<input type="text" th:field="*{email}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email name Error</p>	
+			</div>
+			<div>
+				<label> Password :<input type="password" th:field="*{password}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>	
+			</div>
+			<div>
+				<label> Re-type Password: <input type="password" th:field="*{passwordCheck}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
+			</div>
+			
+			<input type="submit" class="btn btn-primary" value="Signup"></input>		
+		</form>
+		<a th:href="@{/login}" class="link-container">Login</a>
+            <a th:href="@{/forgot_password}" class="link-container">Forgot your password?</a>
+	</div>
+</div>
+</body>
+</html>

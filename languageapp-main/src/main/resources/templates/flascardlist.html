@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Language App</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a th:href="@{/flashcards}">Flashcards</a></li>
+				<li><a th:href="@{/practice}">Practice mode</a></li>
+				<li sec:authorize="hasAuthority('ADMIN')"><a
+					th:href="@{/admin/users}">User List</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div>
+
+		<h1>Your flascards</h1>
+
+		<table class="table table-striped">
+			<tbody>
+				<tr>
+					<td>Front</td>
+					<td>Back</td>
+					<td>Action</td>
+				</tr>
+				<tr th:each="flashcard : ${flashcards}">
+					<td>
+						<div th:if="${flashcard.showBack == false}">
+							<p th:text="${flashcard.front}"></p>
+						</div>
+					</td>
+					<td>
+						<div th:if="${flashcard.showBack == true}">
+							<p th:text="${flashcard.back}"></p>
+						</div>
+					</td>
+					<td>
+						<div th:if="${flashcard.showBack == false}">
+							<a th:href="@{/showback/{id}(id=${flashcard.id})}"
+								class="btn btn-xs btn-primary">Show Back</a>
+						</div>
+						<div th:if="${flashcard.showBack == true}">
+							<a th:href="@{/showfront/{id}(id=${flashcard.id})}"
+								class="btn btn-xs btn-primary">Show Front</a>
+						</div> <a th:href="@{/delete/{id}(id=${flashcard.id})}"
+						class="btn btn-xs btn-danger">Delete</a>
+						<a th:href="@{/edit/{id}(id=${flashcard.id})}"
+						calss="btn btn-primary">Edit</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="row">
+            <div class="col-md-4" style="padding: 10px 20px">
+                <a href="/add" class="btn btn-success">Add Flashcard</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4" style="padding: 10px 20px">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out" class="btn btn-sm btn-danger" />
+                </form>
+            </div>
+        </div>
+	</div>
+</body>

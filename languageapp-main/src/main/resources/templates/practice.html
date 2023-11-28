@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+    <title>Flashcard Practice</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <style>
+    	#inputText {
+    		width: 150px;
+    	}
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Language App</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a th:href="@{/flashcards}">Flashcards</a></li>
+      <li class="active"><a th:href="@{/practice}">Practice mode</a></li>
+      <li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/users}">User List</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <div class="container mt-4">
+
+        <h1>Flashcard Practice Mode</h1>
+
+        <form th:action="@{/check}" th:object="${currFlashcard}" method="post">
+            <div class="form-group">
+                <label for="inputText">Front:</label>
+                <p class="mb-3" th:text="${currFlashcard.front}"></p>
+                <input type="text" id="inputText" name="userInput" class="form-control mb-3" />
+                <input type="hidden" name="flashcardId" th:value="${currFlashcard.id}">
+                <button type="submit" class="btn btn-primary" >Check Answer</button>
+            </div>
+        </form>
+        <div th:if="${Message eq 'Correct'}" class="alert alert-success">Correct</div>
+        <div th:if="${Message eq 'Incorrect'}" class="alert alert-danger" th:text="${currFlashcard.back}"></div>
+    </div>
+</body>
+</html>

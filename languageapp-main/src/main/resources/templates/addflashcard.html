@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Flashcard add</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Add Flashcard</h1>
+	<div>
+		<form th:object="${flashcard}" th:action="@{saveflashcard}" action="#" method="post">
+		  	<label for="front">Front</label>
+			<input type="text" id="front" th:field="*{front}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="back">Back</label>
+			<input type="text" id="back" th:field="*{back}" />
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>
